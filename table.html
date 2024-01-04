@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .image-format {
+            max-width: 50px;
+            max-height: 50px; 
+        }
+    </style>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif; 
+        background-color: #f4f4f4; 
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd; 
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .cell {
+        font-weight: bold;
+    }
+
+    .image-format {
+        max-width: 100px;
+        max-height: 100px;
+        border-radius: 50px; 
+        border: 3px solid black;
+    }
+
+    tbody tr:hover {
+        background-color: #f5f5f5; 
+    }
+</style>
+
+<body>
+    <table id="container">
+        <thead>
+            <th class="cell">ID</th>
+            <th class="cell">Firstname</th>
+            <th class="cell">Lastname</th>
+            <th class="cell">Age</th>
+            <th class="cell">Image</th>
+        </thead>
+        <tbody id="output"></tbody>
+
+        <script>
+            fetch('student.json') 
+                .then(response => response.json())
+                .then(data => {
+                    let displayOutput = "";
+                    for (const item of data) {
+                        displayOutput += `
+                            <tr>
+                                <td>${item.id}</td>
+                                <td>${item.firstName}</td>
+                                <td>${item.lastName}</td>
+                                <td>${item.age}</td>
+                                <td><img src="${item.images}" class="image-format"></td>
+                            </tr>
+                        `;
+                    }
+                    document.querySelector("#output").innerHTML = displayOutput;
+                })
+              
+        </script>
+    </table>
+</body>
+</html>
